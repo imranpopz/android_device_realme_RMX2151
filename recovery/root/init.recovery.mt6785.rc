@@ -53,12 +53,6 @@ service hal_cryptoeng_oppo /sbin/vendor.oppo.hardware.cryptoeng@1.0-service
     disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
 service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service.trustonic
     user root
     group root drmrpc
