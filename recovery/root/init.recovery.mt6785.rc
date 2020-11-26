@@ -8,9 +8,8 @@ on fs
 on fs
     wait /dev/block/platform/bootdevice/
     symlink /dev/block/platform/bootdevice/ /dev/block/bootdevice
-    
-    symlink /sbin/libMcGatekeeper.so /sbin/gatekeeper.mt6785.so
-    symlink /sbin/libMcGatekeeper.so /sbin/gatekeeper.oppo6785.so
+    write /sys/devices/platform/charger/power_supply/otg/otg_switch 1
+
 
     start hwservicemanager
     start servicemanager
