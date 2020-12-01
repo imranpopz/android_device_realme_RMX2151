@@ -57,11 +57,39 @@ service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service.trustonic
     group root drmrpc
     disabled
     seclabel u:r:recovery:s0
+	
+service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+	
+service mobicore /sbin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry \
+    -r /vendor/app/mcRegistry/06090000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/05120000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/020b0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/05070000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/030b0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/03100000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/030c0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin \
+    -r /vendor/app/mcRegistry/070c0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/090b0000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/0f5eed3c3b5a47afacca69a84bf0efad.drbin \
+    -r /vendor/app/mcRegistry/07060000000000000000000000007169.drbin \
+    -r /vendor/app/mcRegistry/07407000000000000000000000000000.drbin \
+    -r /vendor/app/mcRegistry/9073f03a9618383bb1856eb3f990babd.drbin
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
 
 on property:hwservicemanager.ready=true
     start mobicore
     start hal_cryptoeng_oppo
     start keymaster-4-0
+    start gatekeeper-1-0
 
 on property:ro.crypto.state=unsupported
     stop mobicore
@@ -69,6 +97,7 @@ on property:ro.crypto.state=unsupported
     stop keymaster-4-0
     stop servicemanager
     stop hwservicemanager
+    stop gatekeeper-1-0
 
 on property:ro.crypto.state=unencrypted
     stop mobicore
@@ -83,6 +112,7 @@ on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
     stop keymaster-4-0
     stop servicemanager
     stop hwservicemanager
+    stop gatekeeper-1-0
 
 on boot
     # Enable Power modes and set the CPU Freq Sampling rates
