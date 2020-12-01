@@ -40,12 +40,6 @@ service keystore /sbin/keystore /tmp/misc/keystore
     disabled
     seclabel u:r:recovery:s0
 
-service mobicore /vendor/bin/mcDriverDaemon
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
 service hal_cryptoeng_oppo /sbin/vendor.oppo.hardware.cryptoeng@1.0-service
     user root
     group root input sdcard_rw sdcard_r
