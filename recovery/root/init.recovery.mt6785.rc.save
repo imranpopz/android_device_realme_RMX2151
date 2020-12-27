@@ -1,8 +1,6 @@
 on fs
     install_keyring
     mkdir /mnt/vendor/persist 0777 system system
-    mkdir /mnt/vendor/persist/mcRegistry 0777 system system
-    mkdir /data/vendor/mcRegistry 0777 system system
     setprop crypto.ready 1
 
 on fs
@@ -99,14 +97,6 @@ on property:ro.crypto.state=unencrypted
     stop gatekeeper-1-0
 
 on property:twrp.decrypt.done=true
-    stop hal_cryptoeng_oppo
-    stop mobicore
-    stop servicemanager
-    stop hwservicemanager
-    stop keymaster-4-0
-    stop gatekeeper-1-0
-
-on property:crypto.ready=0
     stop hal_cryptoeng_oppo
     stop mobicore
     stop servicemanager
